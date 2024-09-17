@@ -1,10 +1,10 @@
-import React from "react";
+import "./CampoTexto.css";
 
-const CampoTexto = () => {
+const CampoTexto = (props) => {
     return (
-        <div>
-            <label>Nome:</label>
-            <input></input>
+        <div className="campo-texto">
+            <label>{props.label}</label>
+            <input type="text" placeholder={props.placeholder}></input>
         </div>
     );
 };
