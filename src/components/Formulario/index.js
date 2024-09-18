@@ -1,3 +1,4 @@
+import Butao from "../Botao";
 import CampoTexto from "../CampoTexto";
 import ListaSuspensa from "../ListaSuspensa";
 import "./Formulario.css";
@@ -21,6 +22,7 @@ const Formulario = () => {
                     placeholder="digite o endereço da imagem"
                 />
                 <ListaSuspensa label="Time" itens={times} />
+                <Butao>criar card</Butao>
             </form>
         </section>
     );
