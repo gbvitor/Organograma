@@ -1,21 +1,21 @@
 import "./CampoTexto.css";
 
 const CampoTexto = (props) => {
-    // Adicione aqui o código para capturar e disparar o evento ao alterar o valor do input
+    const placeholderModificada = `${props.placeholder}...`;
 
-    const aoDigitado = (e) => {
-        props.aoAlterado(e.target.value);
+    const aoDigitado = (evento) => {
+        props.aoAlterado(evento.target.value);
     };
+
     return (
         <div className="campo-texto">
             <label>{props.label}</label>
             <input
-                onChange={aoDigitado}
                 value={props.valor}
-                type="text"
+                onChange={aoDigitado}
                 required={props.obrigatorio}
-                placeholder={props.placeholder}
-            ></input>
+                placeholder={placeholderModificada}
+            />
         </div>
     );
 };

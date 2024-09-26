@@ -1,53 +1,64 @@
-import Butao from "../Botao";
+import { useState } from "react";
+import Botao from "../Botao";
 import CampoTexto from "../CampoTexto";
 import ListaSuspensa from "../ListaSuspensa";
 import "./Formulario.css";
 
-import { useState } from "react";
-
-const Formulario = () => {
-    const times = [
-        "programação",
-        "design",
-        "front-end",
-        "back-end",
-        "data science",
-    ];
+const Formulario = (props) => {
     const [nome, setNome] = useState("");
     const [cargo, setCargo] = useState("");
     const [imagem, setImagem] = useState("");
-    const aoSalvar = (e) => {
-        e.preventDefault();
-        console.log(nome, cargo, imagem);
+    const [time, setTime] = useState("");
+
+    const aoSalvar = (evento) => {
+        evento.preventDefault();
+        props.aoColaboradorCadastrado({
+            nome,
+            cargo,
+            imagem,
+            time,
+        });
+        setNome("");
+        setCargo("");
+        setImagem("");
+        setTime("");
     };
+
     return (
         <section className="formulario">
             <form onSubmit={aoSalvar}>
-                <h2>Preencha os dados para criar o card</h2>
+                <h2>Preencha os dados para criar o card do colaborador</h2>
                 <CampoTexto
-                    aoAlterado={(valor) => setNome(valor)}
                     obrigatorio={true}
-                    value={nome}
                     label="Nome"
-                    placeholder="digite seu nome"
+                    placeholder="Digite seu nome"
+                    valor={nome}
+                    aoAlterado={(valor) => setNome(valor)}
                 />
                 <CampoTexto
-                    aoAlterado={(valor) => setCargo(valor)}
                     obrigatorio={true}
-                    value={cargo}
                     label="Cargo"
-                    placeholder="digite seu cargo"
+                    placeholder="Digite seu cargo"
+                    valor={cargo}
+                    aoAlterado={(valor) => setCargo(valor)}
                 />
                 <CampoTexto
-                    aoAlterado={(valor) => setImagem(valor)}
                     label="Imagem"
-                    value={imagem}
-                    placeholder="digite o endereço da imagem"
+                    placeholder="Digite o endereço da imagem"
+                    valor={imagem}
+                    aoAlterado={(valor) => setImagem(valor)}
                 />
-                <ListaSuspensa required={true} label="Time" itens={times} />
-                <Butao onSubmit={aoSalvar}>criar card</Butao>
+                <ListaSuspensa
+                    obrigatorio={true}
+                    label="Time"
+                    itens={props.times}
+                    valor={time}
+                    aoAlterado={(valor) => setTime(valor)}
+                />
+                <Botao>Criar Card</Botao>
             </form>
         </section>
     );
 };
+
 export default Formulario;
